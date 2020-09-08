@@ -37,7 +37,7 @@
                     tooltip: {
                         trigger: 'item',
                         formatter: function (val) {
-                            return `异常健康证占比：${val.data[1]}%`
+                            return `学校违规数：${val.data[1]}个`
                         }
                     },
                     xAxis: {name: 'amount',show:false},
@@ -83,7 +83,7 @@
                             },
                             label: {
                                 formatter: function (val) {
-                                    return `${val.data[1]}%`
+                                    return `${val.data[1]}个`
                                 },
                                 show: true,
                                 position: 'right',
@@ -107,7 +107,7 @@
                         {
                             type: 'inside',
                             yAxisIndex: [0],
-                            start: 60,
+                            start: 90,
                             end: 100
                         }
                     ],

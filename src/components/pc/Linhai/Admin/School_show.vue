@@ -965,8 +965,8 @@ export default {
     getList4() {
       let params = {
         uid: this.$store.state.user.uid,
-        page4: this.page,
-        paginate4: this.paginate,
+        page: this.page4,
+        paginate: this.paginate4,
         [this.select]: this.input,
       };
       this.$https

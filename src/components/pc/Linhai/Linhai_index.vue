@@ -40,7 +40,8 @@
                     </dv-border-box-7>
                     <dv-border-box-7 title="学校违规情况" class="box1" ref="box4" :titleWidth=160>
                         <h2>学校违规情况</h2>
-                        <dv-scroll-board ref="srroll_1" @click="getWeigui" :config="config2" style="width:94%;height:82%;margin: 3%" />
+                        <!-- <dv-scroll-board ref="srroll_1" @click="getWeigui" :config="config2" style="width:94%;height:82%;margin: 3%" /> -->
+                        <Mixed2 :data="weiguiList" ref="Mixed2" style="width: 100%;height: 100%"></Mixed2>
                     </dv-border-box-7>
                 </div>
             </div>
@@ -71,6 +72,7 @@
         name:'home',
         components:{
             Mixed:()=>import('./New_mixed'),
+            Mixed2:()=>import('./New_mixed2'),
             Map:()=>import('./component/Map'),
             Dataset:()=>import('./Linhai_dataset'),
             Customized:()=>import('./Linhai_doughnut'),
@@ -83,6 +85,7 @@
                     general:{},
                     area_health:[],
                 },
+                weiguiList:[],
                 city_name:"临海市",
                 regions_chart:{
                     area_chart:[],
@@ -217,21 +220,31 @@
                 this.showBack = data;
             },
             getSchool(){
-                let params ={'uid':this.$store.state.user.uid};
-                this.$https.fetchPost('/plugin/statistics/api_index/schoolViolation',params).then((res) => {
-                    var arr = [];
-                    if(res){
-                        for (let i = 0; i < res.length ; i++) {
-                            arr.push(res[i].name);
-                            arr.push(res[i].violation);
-                            arr.push(String(res[i].num));
-                            arr.push(String(res[i].code));
-                            this.data2.push(arr);
-                            arr = []
-                        }
-                        this.getConfig2();
-                    }
+                // let params ={'uid':this.$store.state.user.uid};
+                // this.$https.fetchPost('/plugin/statistics/api_index/schoolViolation',params).then((res) => {
+                //     var arr = [];
+                //     if(res){
+                //         for (let i = 0; i < res.length ; i++) {
+                //             arr.push(res[i].name);
+                //             arr.push(res[i].violation);
+                //             arr.push(String(res[i].num));
+                //             arr.push(String(res[i].code));
+                //             this.data2.push(arr);
+                //             arr = []
+                //         }
+                //         this.getConfig2();
+                //     }
 
+                // })
+                let params ={'uid':this.$store.state.user.uid};
+                this.$https.fetchPost('/plugin/statistics/api_index/lstj',params).then((res) => {
+                    this.weiguiList = res;
+                    this.$nextTick(function () {
+                        let that = this;
+                        setTimeout(()=>{
+                            that.init_child("Mixed2");
+                        }, 500)
+                    })
                 })
             },
             getConfig2(){
