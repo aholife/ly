@@ -44,7 +44,9 @@
                     yAxis: {
                         type: 'category',
                         axisLabel: {
-                            formatter: '{value}',
+                            formatter: (val)=>{
+                                return val.length>6?val.substring(0,6)+"..":val;
+                            },
                             show: true,
                             textStyle: {
                                 show:false,
@@ -107,7 +109,7 @@
                         {
                             type: 'inside',
                             yAxisIndex: [0],
-                            start: 90,
+                            start: 96,
                             end: 100
                         }
                     ],
